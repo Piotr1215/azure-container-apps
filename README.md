@@ -1,5 +1,11 @@
 # Azure Container Apps
 
+Container Apps is a new serverless offering from Azure. 
+
+## Compare other offerings
+## Explain DAPR briefly
+## Diagram with component architecture
+## Sequence diagram with revision flow
 
 ## Run hello world
 
