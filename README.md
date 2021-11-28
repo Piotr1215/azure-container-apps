@@ -58,7 +58,7 @@ From there we can execute a simple query to read the stdin logs from sample app:
 
 ![hello-world-logs](media/hello-world-logs.png)
 
-```kusto
+```sql
 ContainerAppConsoleLogs_CL 
 | where ContainerAppName_s == 'my-container-app'
 | project ContainerAppName_s, ContainerImage_s, format_datetime(TimeGenerated, "hh:mm:ss"), RevisionName_s, EnvironmentName_s, Log_s
