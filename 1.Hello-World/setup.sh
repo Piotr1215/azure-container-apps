@@ -2,11 +2,17 @@
 
 set -eou pipefail allexport
 
-echo "Enable Contianer Apps (Preview)"
-
 # Enable Contianer Apps (Preview)
-az extension add \
-  --source https://workerappscliextension.blob.core.windows.net/azure-cli-extension/containerapp-0.2.0-py2.py3-none-any.whl --yes
+echo "Enable Contianer Apps (Preview)"
+echo "Installing az containerapp extension"
+
+mapfile -t result < <(az extension list | grep containerapp)
+num=${#result[@]}
+
+if ((num == 0)); then
+  az extension add \
+    --source https://workerappscliextension.blob.core.windows.net/azure-cli-extension/containerapp-0.2.0-py2.py3-none-any.whl --yes
+fi
 
 az provider register --namespace Microsoft.Web
 
