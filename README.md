@@ -1,15 +1,26 @@
 # Azure Container Apps
 
-Container Apps is a new serverless offering from Azure.
+Container Apps is a new serverless offering from Azure. As of the time when this article is published, it is still in preview. 
 
-### Compare other offerings
+The reason this offering is interesting is that it fills the gap between serverless and full blown Kubernetes setup. Traditionally for microservice type workloads one would use either serverless or Kubernetes.
+
+This was not ideal as serverless is more suitable for event driven architectures, whereas Kubernetes is complex and requires specialized knowledge to run production grade workloads.
+
+> Microservices architecture moves complexity from inside of a program to surrounding infrastructure.
+
+Another solution  
 ### Explain DAPR briefly
+
 ### Diagram with component architecture
 ### Sequence diagram with revision flow
 
 ## Demo Scenarios
 
-If you want to practice along, I've created [a repo with devcontainer setup](https://github.com/Piotr1215/azure-container-apps) covering 3 separate scenarios.
+If you want to practice along, I've created [a repo with devcontainer setup](https://github.com/Piotr1215/azure-container-apps) covering 2 separate scenarios.
+The first scenario located in folder `1.Hello-World` will deploy a sample "hello world" web app and expose entpoint as internal ingress.
+Second scenario uses [bicep](https://docs.microsoft.com/EN-US/azure/azure-resource-manager/bicep/) to deploy additional configuration and showcase usage of secrets in contianer app.
+
+### Prerequisites
 
 There are a few prerequisites:
 
@@ -19,6 +30,10 @@ There are a few prerequisites:
 
 1. Clone the repository: https://github.com/Piotr1215/azure-container-apps 
 2. VS Code should prompt you to reopen the repo in devcontainer
+
+![container-reopen-prompt](media/container-reopen-prompt.png)
+
+If the prompt does not appear, you can use <kbd>F1</kbd> or <kbd>Ctrl+Shift+P</kbd> and select *Reopen in Container*.
 
 You need to perform [az login](https://docs.microsoft.com/en-us/cli/azure/authenticate-azure-cli). By default, az login command will open up a browser to securely authenticate with Azure subscription.
 
@@ -66,5 +81,6 @@ ContainerAppConsoleLogs_CL
 
 ### State Store with Bicep
 
-### Introduction to DAPR
+To start with the example, navigate to the `2.Bicep-Deploy` directory and run `setup.sh`.
 
+> Bicep is out of scope for this article, but if you are interested, it's worth poining out that together with az CLI, it creates a nice combination of *imperative* and *declarative* style of IaC

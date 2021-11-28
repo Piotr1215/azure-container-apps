@@ -1,4 +1,4 @@
-targetScope = 'subscription'
+targetScope = 'subscription' :hand: 
 
 param envName string = 'dev'
 
