@@ -3,11 +3,6 @@ param envName string = 'blog-sample'
 
 param containerImage string
 param containerPort int
-param registry string
-param registryUsername string
-
-@secure()
-param registryPassword string
 
 module law 'law.bicep' = {
     name: 'log-analytics-workspace'
@@ -42,10 +37,6 @@ module containerApp 'containerapp.bicep' = {
         }
     ]
     useExternalIngress: true
-    registry: registry
-    registryUsername: registryUsername
-    registryPassword: registryPassword
-
   }
 }
 output fqdn string = containerApp.outputs.fqdn
