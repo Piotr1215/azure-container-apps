@@ -12,7 +12,7 @@ param containerPort int
 
 // Storage Account Connection String
 @secure()
-param storageAccountConnectionString string
+param storageKey string
 
 param envVars array = []
 
@@ -30,7 +30,7 @@ resource containerApp 'Microsoft.Web/containerApps@2021-03-01' = {
       secrets: [
         {
           name: 'storage-account-connection'
-          value: storageAccountConnectionString
+          value: storageKey
         }
       ]
     }

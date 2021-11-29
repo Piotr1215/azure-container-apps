@@ -31,6 +31,8 @@ This is achieved by utilizing open source projects to provide standardized capab
 
 Here are the open source projects that power Container Apps:
 
+![The 4 C's](http://www.plantuml.com/plantuml/proxy?cache=yes&src=https://raw.githubusercontent.com/Piotr1215/azure-container-apps/master/media/caps-components.puml&fmt=png)
+
 Under the hood, container apps runs on AKS cluster with opinionated settings. This offering follows one of the best practices when leveraging Kubernetes:
 
 > Kubernetes is a platform to build platforms
@@ -113,3 +115,46 @@ ContainerAppConsoleLogs_CL
 To start with the example, navigate to the `2.Bicep-Deploy` directory and run `setup.sh`.
 
 > Bicep is out of scope for this article, but if you are interested, it's worth poining out that together with az CLI, it creates a nice combination of _imperative_ and _declarative_ style of IaC
+
+The script will deploy following infrastructure to Azure:
+
+- create a resource group
+- create a container app environment
+- create a container app
+- create a storage account with default contianer named "test container"
+- deploy a simple Go API contianer ([Github](https://github.com/Piotr1215/go-sample-azure-storage), [Docker](https://hub.docker.com/repository/docker/piotrzan/go-sample-azure-storage)) to interact with the storage account
+
+The script with output a URL of the container app. You can navigate to it using <kbd>Ctrl</kbd> + click.
+After a while, you should see message that sample blob files were created.
+
+![blobs-created-message](media/blobs-created-message.png)
+
+Go to the arure resource group (rg-test-containerapps by default) and check for blobs in the test-container. You should see at least 2 files. Refreshing the URL will generate additional files.
+
+![blobs-in-azure](media/blobs-in-azure.png)
+
+The test API writes logs to stdout using Go fmt library, you can see all the custom logs in the Azure Monitor workspace.
+
+![contianer-app-custom-logs](media/contianer-app-custom-logs.png)
+
+```sql
+ContainerAppConsoleLogs_CL
+| where ContainerAppName_s == 'sample-app'
+| project ContainerAppName_s, ContainerImage_s, format_datetime(TimeGenerated, "hh:mm:ss"), RevisionName_s, EnvironmentName_s, Log_s
+```
+
+So how does it work? If you look closely at the bicep template, you can see that it defines an envVar array with configuration and secret references. If you are familiar with Kubernetes, this is how secrets are referenced in a pod spec. Remember that bicep is just a superset of ARM json, so it has all the fields exposed by Container App API.
+
+![bicep-template-main](media/bicep-template-main.png)
+
+The secret is exposed to the container during runtime, so as long as you are using the same environmental variables in your API, you should be able to interact with the storage account in the same way.
+
+The benefit of this approach is that storage account key is never shared, stored in source code repository or embeded in an image.
+
+#### Cleanup
+
+To destroy the resource group and all services within, run `destroy.sh`
+
+## Summary
+
+Container Apps offer more capabilities, but I wanted to focus on a relatively simple usecase to hopefully help demonstrate a very common development tasks like injecting connection string during runtime.

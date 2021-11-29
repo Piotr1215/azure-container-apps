@@ -1,4 +1,4 @@
-targetScope = 'subscription' :hand: 
+targetScope = 'subscription'
 
 param envName string = 'dev'
 
@@ -42,7 +42,7 @@ module containerApp 'containerapp.bicep' = {
   name: 'sample'
   scope: rg
   params: {
-    storageAccountConnectionString: blobStorageConnectionString
+    storageKey: storage.outputs.storageKey
     name: 'sample-app'
     location: deployment().location
     containerAppEnvironmentId: containerAppEnvironment.outputs.id
@@ -53,12 +53,19 @@ module containerApp 'containerapp.bicep' = {
         name: 'ASPNETCORE_ENVIRONMENT'
         value: 'Development'
         }
+        {
+        name: 'AZURE_STORAGE_ACCESS_KEY'
+        secretRef: 'storage-account-connection'
+        }
+        {
+        name: 'AZURE_STORAGE_ACCOUNT'
+        value: storage.outputs.storageAccountName
+        }
     ]
     useExternalIngress: true
   }
 }
 
-var blobStorageConnectionString = 'DefaultEndpointsProtocol=https;AccountName=${storage.outputs.storageAccountName};EndpointSuffix=${environment().suffixes.storage};AccountKey=${storage.outputs.storageKey}'
+// var blobStorageConnectionString = 'DefaultEndpointsProtocol=https;AccountName=${storage.outputs.storageAccountName};EndpointSuffix=${environment().suffixes.storage};AccountKey=${storage.outputs.storageKey}'
 
 output fqdn string = containerApp.outputs.fqdn
-output storageSonnectionString string = blobStorageConnectionString
