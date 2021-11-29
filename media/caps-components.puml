@@ -1,0 +1,35 @@
+@startwbs open-source-caps
+!theme silver
+<style>
+wbsDiagram {
+    BackgroundColor White
+    :depth(0) {
+        RoundCorner 10
+        LineColor black
+        LineStyle 3
+    }
+    :depth(1){
+        LineColor black
+        FontStyle Bold
+    }
+    :depth(2){
+        LineColor blue
+        LineThickness 2.5
+    }
+    .fade {
+        LineColor gray
+        LineThickness 0.5
+        DiagramBorderColor gray
+        DiagramBorderThickness 0.1
+        FontSIze 8
+    }
+}
+</style>
++ Container Apps
+++ KEDA
+--- Kubernetes Event Driven Autoscaling
+++ Envoy Proxy
+--- Intenrla ingress
+++ DAPR
++++ Distributed Application Runtime
+@endwbs
