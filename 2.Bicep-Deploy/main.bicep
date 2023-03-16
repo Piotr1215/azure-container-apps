@@ -5,7 +5,7 @@ param envName string = 'dev'
 param containerImage string
 param containerPort int
 
-resource rg 'Microsoft.Resources/resourceGroups@2021-04-01' = {
+resource rg 'Microsoft.Resources/resourceGroups@2022-09-01' = {
   name: 'rg-test-containerapps'
   location: deployment().location
 }
