@@ -1,7 +1,7 @@
 param location string
 param name string
 
-resource law 'Microsoft.OperationalInsights/workspaces@2020-03-01-preview' = {
+resource law 'Microsoft.OperationalInsights/workspaces@2023-09-01' = {
   name: name
   location: location
   properties: any({
