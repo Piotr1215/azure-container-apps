@@ -1,6 +1,6 @@
 param name string
 
-resource simpleStorage 'Microsoft.Storage/storageAccounts@2021-06-01' = {
+resource simpleStorage 'Microsoft.Storage/storageAccounts@2023-04-01' = {
   name: name
   kind: 'StorageV2'
   location: resourceGroup().location
