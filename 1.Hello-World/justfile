@@ -1,0 +1,16 @@
+group := "rg-app-container-test"
+
+default:
+  just --list 
+
+show_replicas delay="2":
+  viddy -n {{delay}} -- az containerapp replica count -n my-container-app --resource-group rg-app-container-test
+
+foq:
+  #!/usr/bin/env bash
+  fqdn=$(az containerapp show --name my-container-app --resource-group "{{group}}" --query "properties.configuration.ingress.fqdn" -o tsv)
+  
+  echo "To see the page live, navigate to: https://$fqdn"
+
+
+

@@ -18,7 +18,7 @@ echo "Provide below variables or accept the defaults"
 # Provide initial variables and defaults
 read -e -p "Enter resource group name: " -i "rg-app-container-test" group
 read -e -p "Enter Container app environment name: " -i "dev" environment
-read -e -p "Enter location for the resources (or canadacentral): " -i "northeurope" location
+read -e -p "Enter location for the resources (or canadacentral): " -i "westeurope" location
 
 # Check if variables are provided and exit if not
 if [ -z "$group" ] || [ -z "$environment" ] || [ -z "$location" ]; then
