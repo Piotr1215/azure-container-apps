@@ -16,7 +16,7 @@ param storageKey string
 
 param envVars array = []
 
-resource containerApp 'Microsoft.Web/containerApps@2023-12-01' = {
+resource containerApp 'Microsoft.Web/containerApps@2024-04-01' = {
   name: name
   kind: 'containerapp'
   location: location
