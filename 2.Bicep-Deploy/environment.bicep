@@ -3,7 +3,7 @@ param location string
 param lawClientId string
 param lawClientSecret string
 
-resource env 'Microsoft.Web/kubeEnvironments@2024-04-01' = {
+resource env 'Microsoft.Web/kubeEnvironments@2024-11-01' = {
   name: name
   location: location
   properties: {
