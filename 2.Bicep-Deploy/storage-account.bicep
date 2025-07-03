@@ -20,7 +20,7 @@ resource simpleStorage 'Microsoft.Storage/storageAccounts@2024-01-01' = {
 
 }
 
-resource mainstoragecontainer 'Microsoft.Storage/storageAccounts/blobServices/containers@2024-01-01' = {
+resource mainstoragecontainer 'Microsoft.Storage/storageAccounts/blobServices/containers@2025-01-01' = {
   name: '${simpleStorage.name}/default/${blobContainerName}'
   properties: {
     publicAccess: 'Container'
